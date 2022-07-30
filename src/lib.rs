@@ -38,7 +38,7 @@ pub fn lint(reader: &mut (impl Read + Seek)) -> Result<bool> {
 
     reader.seek(SeekFrom::End(-1))?;
     let eof = reader.bytes().next().transpose()?;
-    Ok(eof == Some('\n' as u8))
+    Ok(eof == Some(b'\n'))
 }
 
 /// https://git.kernel.org/pub/scm/git/git.git/tree/xdiff-interface.c?h=v2.37.1#n192
