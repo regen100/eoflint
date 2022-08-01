@@ -16,7 +16,10 @@ where
         debug!("checking {}", f.as_ref().to_string_lossy());
         let passed = lint(&mut BufReader::new(File::open(&f)?))?;
         if !passed {
-            println!("{}: no newline at end of file", f.as_ref().to_string_lossy());
+            println!(
+                "{}: no newline at end of file",
+                f.as_ref().to_string_lossy()
+            );
         }
         ret &= passed;
     }
