@@ -3,6 +3,12 @@ name = "eoflint"
 version = "0.1.0"
 edition = "2021"
 description = "A linter to check EOF"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/regen100/eoflint"
+keywords = ["linter"]
+categories = ["command-line-utilities", "development-tools"]
+include = ["LICENSE", "src/"]
 
 [dependencies]
 anyhow = "1.0.58"
