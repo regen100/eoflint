@@ -11,10 +11,10 @@ categories = ["command-line-utilities", "development-tools"]
 include = ["LICENSE", "src/"]
 
 [dependencies]
-anyhow = "1.0.58"
-log = "0.4.17"
-env_logger = "0.9.0"
-colored = "2.0.0"
-structopt = "0.3.26"
+anyhow = "1.0.75"
+log = "0.4.20"
+env_logger = "0.10.1"
+colored = "2.0.4"
+clap = { version = "4.4.8", features = ["derive"] }
 
 [dev-dependencies]
