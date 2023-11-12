@@ -9,11 +9,15 @@ use std::{path::PathBuf, process::exit};
 struct Opt {
     /// Target files
     pub files: Vec<PathBuf>,
+
+    /// Fix errors
+    #[arg(long)]
+    pub fix: bool,
 }
 
 fn run() -> Result<()> {
     let opt = Opt::parse();
-    if !lint_files(opt.files)? {
+    if !lint_files(opt.files, opt.fix)? {
         exit(1);
     }
     Ok(())
