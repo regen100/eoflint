@@ -1,12 +1,9 @@
-mod lib;
-
 use anyhow::Result;
 use colored::Colorize;
+use eoflint::lint_files;
 use std::{path::PathBuf, process::exit};
 use structopt::clap;
 use structopt::StructOpt;
-
-use crate::lib::lint_files;
 
 #[derive(Debug, StructOpt)]
 #[structopt(about, global_setting = clap::AppSettings::ColoredHelp)]
