@@ -1,20 +1,18 @@
 use anyhow::Result;
+use clap::Parser;
 use colored::Colorize;
 use eoflint::lint_files;
 use std::{path::PathBuf, process::exit};
-use structopt::clap;
-use structopt::StructOpt;
 
-#[derive(Debug, StructOpt)]
-#[structopt(about, global_setting = clap::AppSettings::ColoredHelp)]
+#[derive(Debug, Parser)]
+#[command(about, version)]
 struct Opt {
     /// Target files
-    #[structopt()]
     pub files: Vec<PathBuf>,
 }
 
 fn run() -> Result<()> {
-    let opt = Opt::from_args();
+    let opt = Opt::parse();
     if !lint_files(opt.files)? {
         exit(1);
     }
