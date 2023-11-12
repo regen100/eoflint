@@ -1,12 +1,12 @@
-use anyhow::Result;
+use anyhow::{Context as _, Result};
 use log::debug;
 use std::{
-    fs::File,
-    io::{BufReader, Read, Seek, SeekFrom},
+    fs::{File, OpenOptions},
+    io::{BufReader, Read, Seek, SeekFrom, Write},
     path::Path,
 };
 
-pub fn lint_files<I, P>(files: I) -> Result<bool>
+pub fn lint_files<I, P>(files: I, fix: bool) -> Result<bool>
 where
     I: IntoIterator<Item = P>,
     P: AsRef<Path>,
@@ -20,6 +20,15 @@ where
                 "{}: no newline at end of file",
                 f.as_ref().to_string_lossy()
             );
+            if fix {
+                let mut file = OpenOptions::new().append(true).open(&f)?;
+                file.write(b"\n").with_context(|| {
+                    format!(
+                        "failed to append newline to {}",
+                        f.as_ref().to_string_lossy()
+                    )
+                })?;
+            }
         }
         ret &= passed;
     }
